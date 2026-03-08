@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team · MPI Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#fff;--ink:#0d1b3e;--accent:#1a56db;--accent2:#1e40af;--muted:#4b607a;--card:#f0f5ff;--border:#c7d7f0;--tag:#dbeafe;--tag-ink:#1e40af}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7}
+    nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo-text{font-family:'DM Mono',monospace;font-size:0.75rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#0d1b3e;line-height:1.3}
+    .nav-logo-text span{color:#1a56db}
+    .nav-logo-text small{display:block;font-weight:300;color:#4b607a;font-size:.65rem}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding-bottom:3px;border-bottom:2px solid transparent}
+    .nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .page-wrap{max-width:1100px;margin:0 auto;padding:4rem 5vw 5rem}
+    .page-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:.4rem}
+    .page-subtitle{color:var(--muted);font-size:.95rem;margin-bottom:3rem}
+    .section-label{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;margin-top:2.8rem}
+    .rule{border:none;border-top:1px solid var(--border);margin:3rem 0}
+
+    /* TEAM GRID */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.5rem}
+    .team-card{background:var(--card);border:1px solid var(--border);padding:1.8rem 1.5rem;text-align:center;transition:border-color .2s,box-shadow .2s}
+    .team-card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(26,86,219,.08)}
+    .avatar{width:88px;height:88px;border-radius:50%;background:var(--border);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--muted);overflow:hidden;border:2px solid var(--border)}
+    .avatar.pi{background:linear-gradient(135deg,#1a56db,#1e3a8a);color:#fff;border-color:var(--accent)}
+    .team-card h3{font-size:.95rem;font-weight:500;margin-bottom:.3rem}
+    .team-card .role{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+    .team-card .area{font-size:.8rem;color:var(--muted)}
+    .team-card .links{margin-top:.8rem;display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+    .team-card .links a{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;color:var(--accent2);border:1px solid var(--border);padding:.15rem .55rem;transition:all .15s}
+    .team-card .links a:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+    /* HERO PI CARD */
+    .pi-card{display:grid;grid-template-columns:140px 1fr;gap:2.5rem;align-items:center;background:var(--card);border:1px solid var(--border);padding:2.5rem;margin-bottom:3rem}
+    .pi-card .pi-photo{width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#1a56db,#1e3a8a);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:3rem;color:#fff;border:3px solid var(--accent);flex-shrink:0}
+    .pi-card h2{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:.3rem}
+    .pi-card .pi-role{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
+    .pi-card p{color:var(--muted);font-size:.92rem;line-height:1.7;margin-bottom:.8rem}
+    .pi-card .pi-links{display:flex;gap:.7rem;flex-wrap:wrap}
+    .pi-card .pi-links a{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.4rem .9rem;border:1.5px solid var(--ink);color:var(--ink);transition:all .2s}
+    .pi-card .pi-links a:hover{background:var(--ink);color:#fff}
+    .pi-card .pi-links a.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .pi-card .pi-links a.primary:hover{background:#1441b5}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .a1{animation:fadeUp .45s ease both .04s}.a2{animation:fadeUp .45s ease both .1s}
+    .a3{animation:fadeUp .45s ease both .16s}.a4{animation:fadeUp .45s ease both .22s}
+
+    footer{border-top:1px solid var(--border);padding:2rem 5vw;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.08em;flex-wrap:wrap;gap:.5rem}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{color:var(--ink)}
+    @media(max-width:768px){.nav-links{gap:1rem}.pi-card{grid-template-columns:1fr;text-align:center}.pi-card .pi-photo{margin:0 auto}.pi-card .pi-links{justify-content:center}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="38" height="38" style="flex-shrink:0">
+      <defs><linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1a56db"/><stop offset="100%" style="stop-color:#1e3a8a"/></linearGradient></defs>
+      <circle cx="200" cy="200" r="192" fill="url(#ng)"/><circle cx="200" cy="200" r="178" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+      <g fill="none" stroke="#fff" stroke-width="22" stroke-linecap="square" stroke-linejoin="miter"><line x1="88" y1="270" x2="88" y2="148"/><line x1="88" y1="148" x2="164" y2="220"/><line x1="164" y1="220" x2="240" y2="148"/><line x1="240" y1="148" x2="240" y2="270"/></g>
+      <g fill="none" stroke="#60a5fa" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><line x1="268" y1="165" x2="370" y2="165"/><path d="M290,165 L290,255 Q290,268 280,268"/><path d="M349,165 L349,240 Q349,268 336,268"/></g>
+      <circle cx="256" cy="210" r="5" fill="rgba(255,255,255,0.4)"/>
+    </svg>
+    <div class="nav-logo-text">MPI<span>·</span>Lab<small>York University</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="team.html" class="active">Team</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="openings.html">Openings</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <h1 class="page-title a1">Team</h1>
+  <p class="page-subtitle a2">The people behind Multimodal Perceptual Intelligence Lab.</p>
+
+  <!-- PI -->
+  <div class="pi-card a2">
+    <div class="pi-photo">SM</div>
+    <div>
+      <h2>Shweta Mahajan</h2>
+      <p class="pi-role">Principal Investigator · Assistant Professor, EECS · Vector Faculty Affiliate</p>
+      <p>Prof. Mahajan's research spans deep generative models for multimodal learning — diffusion models, normalizing flows, and VAEs — with applications to vision, language, and autonomous systems. She completed her Ph.D. (summa cum laude) at TU Darmstadt and was a postdoctoral researcher at UBC and a researcher at Qualcomm AI Research.</p>
+      <div class="pi-links">
+        <a href="mailto:shweta.nith@outlook.com" class="primary">Email</a>
+        <a href="https://scholar.google.de/citations?user=DUKzkPMAAAAJ&hl=en" target="_blank">Google Scholar</a>
+        <a href="https://www.linkedin.com/in/shweta-mahajan-4808a017/" target="_blank">LinkedIn</a>
+        <a href="/pdfs/cv.pdf" target="_blank">CV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PhD Students -->
+  <p class="section-label a3">PhD Students</p>
+  <div class="team-grid a3">
+    <div class="team-card">
+      <div class="avatar">?</div>
+      <h3>Openings Available</h3>
+      <p class="role">PhD Student</p>
+      <p class="area">We are recruiting! See the <a href="openings.html" style="color:var(--accent)">Openings</a> page.</p>
+    </div>
+  </div>
+
+  <!-- Masters Students -->
+  <p class="section-label a4">Masters Students</p>
+  <div class="team-grid a4">
+    <div class="team-card">
+      <div class="avatar">?</div>
+      <h3>Openings Available</h3>
+      <p class="role">Masters Student</p>
+      <p class="area">MASc and MEng positions open. See the <a href="openings.html" style="color:var(--accent)">Openings</a> page.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- Collaborators -->
+  <p class="section-label a2">Collaborators & Close Colleagues</p>
+  <div class="team-grid">
+    <div class="team-card a2">
+      <div class="avatar">EH</div>
+      <h3>Eric Hedlin</h3>
+      <p class="role">Collaborator · UBC</p>
+      <p class="area">Diffusion Models · Keypoints · Correspondences</p>
+      <div class="links"><a href="https://stablekeypoints.github.io/" target="_blank">Project</a></div>
+    </div>
+    <div class="team-card a3">
+      <div class="avatar">TR</div>
+      <h3>Tanzila Rahman</h3>
+      <p class="role">Collaborator · UBC</p>
+      <p class="area">Story Generation · Vision-Language</p>
+    </div>
+    <div class="team-card a4">
+      <div class="avatar">DH</div>
+      <h3>Deepti Hegde</h3>
+      <p class="role">Collaborator</p>
+      <p class="area">Autonomous Driving · Multi-modal LLMs</p>
+    </div>
+    <div class="team-card a2">
+      <div class="avatar">AR</div>
+      <h3>Aniket Roy</h3>
+      <p class="role">Collaborator</p>
+      <p class="area">Personalization · LoRA · Style Transfer</p>
+    </div>
+    <div class="team-card a3">
+      <div class="avatar">AB</div>
+      <h3>Apratim Bhattacharyya</h3>
+      <p class="role">Collaborator</p>
+      <p class="area">Normalizing Flows · Generative Models</p>
+      <div class="links"><a href="https://apratimbh.github.io/" target="_blank">Website</a></div>
+    </div>
+    <div class="team-card a4">
+      <div class="avatar">GS</div>
+      <h3>Gopal Sharma</h3>
+      <p class="role">Collaborator · UBC</p>
+      <p class="area">3D Vision · Diffusion · Correspondence</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Multimodal Perceptual Intelligence Lab · York University</span>
+  <span><a href="mailto:shweta.nith@outlook.com">Contact</a> &nbsp;·&nbsp; <a href="https://lassonde.yorku.ca/" target="_blank">Lassonde School of Engineering</a></span>
+</footer>
+</body>
+</html>

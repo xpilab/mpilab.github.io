@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Openings · MPI Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#fff;--ink:#0d1b3e;--accent:#1a56db;--accent2:#1e40af;--muted:#4b607a;--card:#f0f5ff;--border:#c7d7f0;--tag:#dbeafe;--tag-ink:#1e40af}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7}
+    nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo-text{font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#0d1b3e;line-height:1.3}
+    .nav-logo-text span{color:#1a56db}
+    .nav-logo-text small{display:block;font-weight:300;color:#4b607a;font-size:.65rem}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding-bottom:3px;border-bottom:2px solid transparent}
+    .nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .page-wrap{max-width:1100px;margin:0 auto;padding:4rem 5vw 5rem}
+    .section-label{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+    .rule{border:none;border-top:1px solid var(--border);margin:3rem 0}
+
+    /* HERO BANNER */
+    .openings-hero{background:linear-gradient(135deg,#1a56db 0%,#1e3a8a 100%);padding:4rem 4rem;margin-bottom:4rem;position:relative;overflow:hidden}
+    .openings-hero::after{content:'∞';position:absolute;right:3rem;top:50%;transform:translateY(-50%);font-size:10rem;color:rgba(255,255,255,.1);font-family:'DM Serif Display',serif;pointer-events:none;line-height:1}
+    .openings-hero .label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:1rem}
+    .openings-hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:1rem;line-height:1.1}
+    .openings-hero p{color:rgba(255,255,255,.8);font-size:1rem;max-width:560px;font-weight:300}
+
+    /* OPENING CARDS */
+    .opening-card{border:1px solid var(--border);padding:2.2rem;margin-bottom:1.4rem;transition:border-color .2s,box-shadow .2s;background:#fff}
+    .opening-card:hover{border-color:var(--accent);box-shadow:0 4px 24px rgba(26,86,219,.09)}
+    .opening-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+    .opening-card h2{font-family:'DM Serif Display',serif;font-size:1.3rem;flex:1}
+    .opening-tag{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:var(--tag);color:var(--tag-ink);padding:.22rem .65rem;white-space:nowrap;align-self:flex-start;margin-top:.3rem}
+    .opening-tag.deadline{background:#fef3c7;color:#92400e}
+    .opening-card p{font-size:.92rem;color:var(--muted);margin-bottom:.9rem;line-height:1.75}
+    .opening-card ul{padding-left:1.2rem;margin-bottom:1rem}
+    .opening-card li{font-size:.9rem;color:var(--muted);margin-bottom:.3rem}
+    .opening-card li strong{color:var(--ink)}
+    .apply-btn{display:inline-block;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#fff;background:var(--accent);padding:.55rem 1.3rem;border:none;cursor:pointer;transition:background .2s;margin-top:.5rem}
+    .apply-btn:hover{background:#1441b5}
+
+    /* PROCESS */
+    .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.5rem}
+    .process-step{background:var(--card);border:1px solid var(--border);padding:1.5rem}
+    .step-num{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--accent);margin-bottom:.6rem}
+    .process-step h3{font-family:'DM Serif Display',serif;font-size:1rem;margin-bottom:.5rem}
+    .process-step p{font-size:.83rem;color:var(--muted);line-height:1.6}
+
+    /* FAQ */
+    .faq-item{padding:1.4rem 0;border-bottom:1px solid var(--border)}
+    .faq-item h3{font-family:'DM Serif Display',serif;font-size:1.05rem;margin-bottom:.5rem}
+    .faq-item p{font-size:.9rem;color:var(--muted);line-height:1.7}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .a1{animation:fadeUp .45s ease both .04s}.a2{animation:fadeUp .45s ease both .1s}
+    .a3{animation:fadeUp .45s ease both .16s}.a4{animation:fadeUp .45s ease both .22s}
+
+    footer{border-top:1px solid var(--border);padding:2rem 5vw;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.08em;flex-wrap:wrap;gap:.5rem}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{color:var(--ink)}
+    @media(max-width:768px){.nav-links{gap:1rem}.openings-hero{padding:2.5rem 2rem}.openings-hero::after{display:none}.process-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="38" height="38" style="flex-shrink:0">
+      <defs><linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1a56db"/><stop offset="100%" style="stop-color:#1e3a8a"/></linearGradient></defs>
+      <circle cx="200" cy="200" r="192" fill="url(#ng)"/><circle cx="200" cy="200" r="178" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+      <g fill="none" stroke="#fff" stroke-width="22" stroke-linecap="square" stroke-linejoin="miter"><line x1="88" y1="270" x2="88" y2="148"/><line x1="88" y1="148" x2="164" y2="220"/><line x1="164" y1="220" x2="240" y2="148"/><line x1="240" y1="148" x2="240" y2="270"/></g>
+      <g fill="none" stroke="#60a5fa" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><line x1="268" y1="165" x2="370" y2="165"/><path d="M290,165 L290,255 Q290,268 280,268"/><path d="M349,165 L349,240 Q349,268 336,268"/></g>
+      <circle cx="256" cy="210" r="5" fill="rgba(255,255,255,0.4)"/>
+    </svg>
+    <div class="nav-logo-text">MPI<span>·</span>Lab<small>York University</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="openings.html" class="active">Openings</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="openings-hero a1">
+    <p class="label">Multimodal Perceptual Intelligence Lab</p>
+    <h1>Join MPI Lab</h1>
+    <p>We are actively recruiting motivated students and researchers passionate about computer vision, generative models, and multimodal AI. York University is located in Toronto — Canada's AI hub and home to the Vector Institute.</p>
+  </div>
+
+  <p class="section-label a2">Current Openings</p>
+
+  <!-- PhD -->
+  <div class="opening-card a2">
+    <div class="opening-header">
+      <h2>PhD Students in Generative Models & Vision</h2>
+      <span class="opening-tag">PhD</span>
+      <span class="opening-tag deadline">Fall 2026</span>
+    </div>
+    <p>We seek PhD applicants with a strong background in deep learning, computer vision, or machine learning. Experience with diffusion models, VAEs, or GANs is a plus. Fully funded positions are available with competitive stipends.</p>
+    <ul>
+      <li><strong>Degree:</strong> MSc or BSc (with research experience) in CS, ECE, Math, or related field</li>
+      <li><strong>Experience:</strong> Prior research experience or publications at top venues is a strong asset</li>
+      <li><strong>Technical:</strong> Proficiency in PyTorch; familiarity with large-scale model training</li>
+      <li><strong>Interests:</strong> Generative models, computer vision, multimodal learning, or autonomous systems</li>
+    </ul>
+    <a href="mailto:shweta.nith@outlook.com?subject=[Prospective PhD Student]" class="apply-btn">Apply via Email →</a>
+  </div>
+
+  <!-- Masters -->
+  <div class="opening-card a3">
+    <div class="opening-header">
+      <h2>Masters Students (MASc / MEng)</h2>
+      <span class="opening-tag">Masters</span>
+      <span class="opening-tag">Rolling</span>
+    </div>
+    <p>Thesis-based MASc and project-based MEng positions are available in multimodal learning, vision-language models, and generative AI. York University students are especially encouraged to reach out directly.</p>
+    <ul>
+      <li><strong>Degree:</strong> BSc in CS, ECE, or related field</li>
+      <li><strong>Technical:</strong> Strong programming skills in Python/PyTorch; solid ML foundations</li>
+      <li><strong>Preferred:</strong> Undergraduate research or project experience in computer vision or ML</li>
+    </ul>
+    <a href="mailto:shweta.nith@outlook.com?subject=[Prospective Masters Student]" class="apply-btn">Apply via Email →</a>
+  </div>
+
+  <!-- URA -->
+  <div class="opening-card a4">
+    <div class="opening-header">
+      <h2>Undergraduate Research Assistants</h2>
+      <span class="opening-tag">Undergraduate</span>
+      <span class="opening-tag">Rolling</span>
+    </div>
+    <p>Motivated York undergraduates interested in gaining research experience in AI are welcome to reach out. URAs contribute to ongoing projects and can receive academic credit or hourly compensation depending on availability.</p>
+    <ul>
+      <li><strong>Enrolled</strong> at York University in CS, ECE, or Cognitive Science</li>
+      <li><strong>Completed:</strong> At least one ML or computer vision course with strong grades</li>
+      <li><strong>Commitment:</strong> Minimum 10 hrs/week for at least one semester</li>
+    </ul>
+    <a href="mailto:shweta.nith@outlook.com?subject=[Prospective URA]" class="apply-btn">Apply via Email →</a>
+  </div>
+
+  <hr class="rule">
+
+  <!-- HOW TO APPLY -->
+  <p class="section-label">How to Apply</p>
+  <div class="process-grid a2">
+    <div class="process-step">
+      <p class="step-num">Step 01</p>
+      <h3>Prepare Materials</h3>
+      <p>Gather your CV, unofficial transcript, a 1-page research statement, and links to any papers, code, or projects you are proud of.</p>
+    </div>
+    <div class="process-step">
+      <p class="step-num">Step 02</p>
+      <h3>Send an Email</h3>
+      <p>Email <a href="mailto:shweta.nith@outlook.com" style="color:var(--accent)">shweta.nith@outlook.com</a> with subject <strong>"[Prospective Student — Role]"</strong>. Describe what you want to work on and why MPI Lab.</p>
+    </div>
+    <div class="process-step">
+      <p class="step-num">Step 03</p>
+      <h3>Apply Formally (PhD/Masters)</h3>
+      <p>For PhD and MASc, also submit a formal application to the <a href="https://lassonde.yorku.ca/" target="_blank" style="color:var(--accent)">York University graduate portal</a> and mention Prof. Mahajan's name.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- FAQ -->
+  <p class="section-label">Frequently Asked Questions</p>
+  <div class="faq-item">
+    <h3>Are positions funded?</h3>
+    <p>PhD positions are fully funded through a combination of TA/RA salary and research grants. Masters funding varies — please inquire directly.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What research topics does the lab focus on?</h3>
+    <p>Our primary focus is on deep generative models (diffusion models, normalizing flows, VAEs) for multimodal representation learning, with applications to image synthesis, video generation, correspondence, and autonomous systems.</p>
+  </div>
+  <div class="faq-item">
+    <h3>I'm an international student — can I apply?</h3>
+    <p>Absolutely. York University welcomes international students and has strong support infrastructure. Please review the international admissions requirements on the York graduate portal.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do I need a publication to apply?</h3>
+    <p>Publications are a strong asset but not required for PhD applications. Strong undergraduate research projects, thesis work, or open-source contributions are also valued.</p>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Multimodal Perceptual Intelligence Lab · York University</span>
+  <span><a href="mailto:shweta.nith@outlook.com">Contact</a> &nbsp;·&nbsp; <a href="https://lassonde.yorku.ca/" target="_blank">Lassonde School of Engineering</a></span>
+</footer>
+</body>
+</html>
