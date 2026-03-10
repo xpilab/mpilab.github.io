@@ -1,98 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home · MPI Lab</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prof. Shweta Mahajan · Multimodal Perceptual Intelligence Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Linux+Libertine+O&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#fff; --ink:#0d1b3e; --accent:#1a56db; --accent2:#1e40af; --muted:#4b607a; --card:#f0f5ff; --border:#c7d7f0; --tag:#dbeafe; --tag-ink:#1e40af; }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7}
+    /* ── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* NAV */
-    nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-    .nav-logo-text{font-family:'DM Mono',monospace;font-size:0.75rem;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:#0d1b3e;line-height:1.3}
-    .nav-logo-text span{color:#1a56db}
-    .nav-logo-text small{display:block;font-weight:300;color:#4b607a;font-size:0.65rem}
-    .nav-links{display:flex;gap:2rem;list-style:none}
-    .nav-links a{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding-bottom:3px;border-bottom:2px solid transparent}
-    .nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent)}
+    :root {
+      /* Ocean palette */
+      --ocean-deep:   #0a2342;   /* deep navy */
+      --ocean-mid:    #1a5276;   /* mid ocean blue */
+      --ocean-teal:   #148f8f;   /* teal accent */
+      --ocean-light:  #d0eaf4;   /* pale sky */
+      --ocean-foam:   #e8f6f3;   /* foam white-green */
 
-    /* PAGE */
-    .page-wrap{max-width:1100px;margin:0 auto;padding:4rem 5vw 5rem}
-    .section-label{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
-    .rule{border:none;border-top:1px solid var(--border);margin:3rem 0}
+      --white:        #ffffff;
+      --bg:           #f7fbfd;   /* faint ocean tint */
+      --border:       #d0e4ee;
+      --text:         #0d1f2d;
+      --muted:        #5a7a8a;
+      --link:         #1a6e9e;
+      --link-v:       #2e6b8a;
+      --accent:       var(--ocean-teal);
 
-    /* HERO */
-    .hero{display:grid;grid-template-columns:1fr 300px;gap:5rem;align-items:start;padding-top:1rem}
-    .hero .eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem}
-    .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,4vw,3.6rem);line-height:1.1;margin-bottom:1.6rem}
-    .hero h1 em{font-style:italic;color:var(--accent)}
-    .hero p{color:var(--muted);font-size:1rem;margin-bottom:0.9rem;font-weight:300}
-    .hero p strong{color:var(--ink);font-weight:500}
-    .hero-links{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1.8rem}
-    .hero-links a{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;padding:.5rem 1.1rem;border:1.5px solid var(--ink);color:var(--ink);transition:background .2s,color .2s}
-    .hero-links a:hover{background:var(--ink);color:#fff}
-    .hero-links a.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-    .hero-links a.primary:hover{background:#1441b5}
-    .photo-box{position:relative}
-    .photo-box::before{content:'';position:absolute;top:-10px;left:-10px;right:10px;bottom:10px;border:1px solid var(--border);z-index:-1}
-    .photo-placeholder{width:100%;aspect-ratio:3/4;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:.1em}
+      --font-serif: "Linux Libertine O", "Palatino Linotype", Palatino, Georgia, serif;
+      --font-sans:  "DM Sans", "Lucida Sans", system-ui, sans-serif;
+      --max-w:   920px;
+      --nav-h:   58px;
+      --radius:  8px;
+    }
 
-    /* NEWS */
-    .news-list{list-style:none}
-    .news-list li{display:grid;grid-template-columns:80px 1fr;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--border);font-size:.92rem}
-    .news-list .date{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);padding-top:.15rem}
-    .badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;background:var(--tag);color:var(--tag-ink);margin-right:.4rem;vertical-align:middle}
+    html { font-size: 15px; }
 
-    /* RESEARCH GRID */
-    .interests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2rem}
-    .interest-card{background:var(--card);border:1px solid var(--border);padding:1.4rem}
-    .interest-card h3{font-family:'DM Serif Display',serif;font-size:1.05rem;margin-bottom:.5rem}
-    .interest-card p{font-size:.84rem;color:var(--muted);line-height:1.6}
+    body {
+      font-family: var(--font-serif);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
 
-    /* ANIMATE */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-    .a1{animation:fadeUp .45s ease both .04s}.a2{animation:fadeUp .45s ease both .1s}
-    .a3{animation:fadeUp .45s ease both .16s}.a4{animation:fadeUp .45s ease both .22s}
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:visited { color: var(--link-v); }
 
-    /* FOOTER */
-    footer{border-top:1px solid var(--border);padding:2rem 5vw;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.08em;flex-wrap:wrap;gap:.5rem}
-    footer a{color:var(--muted);text-decoration:none}
-    footer a:hover{color:var(--ink)}
+    /* ── Top nav bar ──────────────────────────────────────── */
+    nav.topbar {
+      background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-mid) 100%);
+      box-shadow: 0 2px 12px rgba(10,35,66,0.35);
+      height: var(--nav-h);
+      padding: 0 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-    @media(max-width:768px){.hero{grid-template-columns:1fr}.photo-box{max-width:200px;order:-1}.interests-grid{grid-template-columns:1fr}.nav-links{gap:1rem}}
+    /* subtle noise texture overlay */
+    nav.topbar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    nav.topbar .site-title {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      position: relative;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    nav.topbar .site-title .lab-sub {
+      display: block;
+      font-weight: 400;
+      font-size: 0.72rem;
+      opacity: 0.70;
+      margin-left: 0;
+      margin-top: 0.05rem;
+      letter-spacing: 0.03em;
+    }
+
+    nav.topbar a.site-title { color: #fff; }
+    nav.topbar a.site-title:hover { text-decoration: none; opacity: 0.88; }
+
+    /* divider dot */
+    nav.topbar .nav-divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(255,255,255,0.2);
+      margin: 0 0.3rem;
+      flex-shrink: 0;
+    }
+
+    nav.topbar ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      position: relative;
+    }
+
+    nav.topbar ul li a {
+      display: block;
+      padding: 0.38rem 0.9rem;
+      color: rgba(255,255,255,0.85);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 20px;
+      transition: background 0.18s, color 0.18s, transform 0.12s;
+      letter-spacing: 0.01em;
+    }
+
+    nav.topbar ul li a:hover {
+      background: rgba(255,255,255,0.15);
+      color: #ffffff;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    nav.topbar ul li a.active {
+      background: rgba(255,255,255,0.22);
+      color: #ffffff;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+    }
+
+    /* ── Page wrapper ─────────────────────────────────────── */
+    .page {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2rem 1.4rem 3.5rem;
+      background: var(--white);
+      min-height: calc(100vh - var(--nav-h));
+    }
+
+    /* ── Section heading ─────────────────────────────────── */
+    h2.section-heading {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ocean-teal);
+      border-bottom: 2px solid var(--ocean-light);
+      padding-bottom: 0.4rem;
+      margin: 2.4rem 0 1.1rem;
+    }
+
+    h3 {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0.1rem 0 0.2rem;
+      color: var(--ocean-deep);
+    }
+
+    /* ── Profile block ───────────────────────────────────── */
+    .profile-block {
+      display: flex;
+      gap: 1.8rem;
+      align-items: flex-start;
+      margin-top: 1.2rem;
+    }
+
+    .profile-block img {
+      width: 155px;
+      height: auto;
+      border-radius: var(--radius);
+      border: 2px solid var(--ocean-light);
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(10,35,66,0.12);
+    }
+
+    .profile-block .photo-placeholder {
+      width: 155px;
+      height: 185px;
+      background: linear-gradient(145deg, var(--ocean-light), var(--ocean-foam));
+      border-radius: var(--radius);
+      border: 2px solid var(--ocean-light);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: var(--font-sans);
+    }
+
+    .profile-text h1 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: normal;
+      color: var(--ocean-deep);
+      margin-bottom: 0.4rem;
+    }
+
+    .profile-text p {
+      margin-bottom: 0.7rem;
+      font-size: 0.96rem;
+    }
+
+    /* ── Profile link buttons ─────────────────────────────── */
+    .profile-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      font-family: var(--font-sans);
+    }
+
+    .profile-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem 0.95rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: all 0.18s ease;
+      text-decoration: none;
+    }
+
+    /* Primary style */
+    .profile-links a.btn-primary {
+      background: linear-gradient(135deg, var(--ocean-mid), var(--ocean-deep));
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 8px rgba(26,82,118,0.35);
+    }
+    .profile-links a.btn-primary:hover {
+      background: linear-gradient(135deg, var(--ocean-teal), var(--ocean-mid));
+      box-shadow: 0 4px 14px rgba(26,82,118,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* Outlined style */
+    .profile-links a.btn-outline {
+      background: transparent;
+      color: var(--ocean-mid);
+      border: 1.5px solid var(--ocean-mid);
+    }
+    .profile-links a.btn-outline:hover {
+      background: var(--ocean-light);
+      border-color: var(--ocean-teal);
+      color: var(--ocean-deep);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    /* ── Contact table ───────────────────────────────────── */
+    table.contact-table {
+      border-collapse: collapse;
+      font-size: 0.91rem;
+      margin-top: 0.6rem;
+    }
+
+    table.contact-table td {
+      padding: 0.2rem 1rem 0.2rem 0;
+      vertical-align: top;
+    }
+
+    table.contact-table td:first-child {
+      font-family: var(--font-sans);
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: 0.83rem;
+      font-weight: 500;
+    }
+
+    /* ── News list ───────────────────────────────────────── */
+    .news-list {
+      list-style: none;
+      font-size: 0.93rem;
+    }
+
+    .news-list li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: baseline;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #eef4f8;
+    }
+
+    .news-list li:last-child { border-bottom: none; }
+
+    .news-date {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 6rem;
+      font-weight: 500;
+    }
+
+    .news-tag {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+    }
+
+    .tag-award { background: #fff4d6; color: #7a4f00; border: 1px solid #f5c842; }
+    .tag-new   { background: var(--ocean-light); color: var(--ocean-deep); border: 1px solid #93c8e0; }
+
+    .news-body { flex: 1; }
+    .news-body strong { font-weight: bold; color: var(--ocean-deep); }
+
+    /* ── Research grid ───────────────────────────────────── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 1.4rem;
+      font-size: 0.93rem;
+    }
+
+    .research-item {
+      border-left: 3px solid var(--ocean-teal);
+      padding: 0.5rem 0 0.5rem 0.85rem;
+      background: linear-gradient(to right, var(--ocean-foam), transparent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .research-item p {
+      color: var(--muted);
+      font-size: 0.87rem;
+      margin-top: 0.18rem;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-mid) 100%);
+      padding: 1.1rem 1.8rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.65);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    footer a { color: rgba(255,255,255,0.7); }
+    footer a:hover { color: #fff; text-decoration: none; }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .profile-block { flex-direction: column; }
+      .research-grid { grid-template-columns: 1fr; }
+      nav.topbar { flex-wrap: wrap; height: auto; padding: 0.6rem 1rem; gap: 0.5rem; }
+      nav.topbar .nav-divider { display: none; }
+    }
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="38" height="38" style="flex-shrink:0">
-      <defs>
-        <linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#1a56db"/><stop offset="100%" style="stop-color:#1e3a8a"/>
-        </linearGradient>
-      </defs>
-      <circle cx="200" cy="200" r="192" fill="url(#ng)"/>
-      <circle cx="200" cy="200" r="178" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-      <g fill="none" stroke="#fff" stroke-width="22" stroke-linecap="square" stroke-linejoin="miter">
-        <line x1="88" y1="270" x2="88" y2="148"/><line x1="88" y1="148" x2="164" y2="220"/>
-        <line x1="164" y1="220" x2="240" y2="148"/><line x1="240" y1="148" x2="240" y2="270"/>
-      </g>
-      <g fill="none" stroke="#60a5fa" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="268" y1="165" x2="370" y2="165"/>
-        <path d="M290,165 L290,255 Q290,268 280,268"/>
-        <path d="M349,165 L349,240 Q349,268 336,268"/>
-      </g>
-      <circle cx="256" cy="210" r="5" fill="rgba(255,255,255,0.4)"/>
-    </svg>
-    <div class="nav-logo-text">MPI<span>·</span>Lab<small>York University</small></div>
-  </a>
-  <ul class="nav-links">
+<!-- ── Navigation ────────────────────────────────────────── -->
+<nav class="topbar">
+  <a class="site-title" href="index.html">Multimodal Perceptual Intelligence<span class="lab-sub">York University</span></a>
+  <div class="nav-divider"></div>
+  <ul>
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="team.html">Team</a></li>
     <li><a href="publications.html">Publications</a></li>
@@ -101,71 +383,134 @@
   </ul>
 </nav>
 
-<div class="page-wrap">
-  <div class="hero">
-    <div>
-      <p class="eyebrow a1">Multimodal Perceptual Intelligence Lab</p>
-      <h1 class="a2" style="font-family:'DM Sans',sans-serif;font-size:1.8rem;font-weight:400;color:#0d1b3e;letter-spacing:0;line-height:1.4">Prof. Shweta Mahajan</h1>
-      <p class="a3"><strong>Assistant Professor</strong>, EECS Department, York University.<br>Vector Faculty Affiliate, Vector Institute for AI.</p>
-      <p class="a3">I research <strong>computer vision</strong> and <strong>machine learning</strong>, with a focus on deep generative models — diffusion models, normalizing flows, variational methods, and GANs — for <strong>multimodal representation learning</strong>.</p>
-      <p class="a3">Previously a Machine Learning Researcher at <strong>Qualcomm AI Research</strong> and postdoctoral researcher & Vector Postdoctoral Affiliate at UBC Vision Group, advised by Profs. Leonid Sigal and Kwang Moo Yi. Ph.D. (summa cum laude) from TU Darmstadt under Prof. Stefan Roth.</p>
-      <div class="hero-links a4">
-        <a href="/cdn-cgi/l/email-protection#9ceff4ebf9e8fdb2f2f5e8f4dcf3e9e8f0f3f3f7b2fff3f1" class="primary">Email</a>
-        <a href="https://scholar.google.de/citations?user=DUKzkPMAAAAJ&hl=en" target="_blank">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/shweta-mahajan-4808a017/" target="_blank">LinkedIn</a>
-        <a href="/pdfs/cv.pdf" target="_blank">CV</a>
+<!-- ── Main content ──────────────────────────────────────── -->
+<div class="page">
+
+  <h2 class="section-heading">Welcome</h2>
+
+  <div class="profile-block">
+    <!-- Replace src with actual photo path, e.g. images/shweta.jpg -->
+    <div class="photo-placeholder">[ photo ]</div>
+
+    <div class="profile-text">
+      <h1>Prof. Shweta Mahajan</h1>
+      <p><strong>Assistant Professor</strong>, EECS Department, York University.<br>
+         Vector Faculty Affiliate, Vector Institute for AI.</p>
+      <p>
+        I research <strong>computer vision</strong> and <strong>machine learning</strong>,
+        with a focus on deep generative models — diffusion models, normalizing flows,
+        variational methods, and GANs — for <strong>multimodal representation learning</strong>.
+      </p>
+      <p>
+        Previously a Machine Learning Researcher at <strong>Qualcomm AI Research</strong>
+        and postdoctoral researcher &amp; Vector Postdoctoral Affiliate at the
+        UBC Vision Group, advised by Profs. Leonid Sigal and Kwang Moo Yi.
+        Ph.D. (summa cum laude) from TU Darmstadt under Prof. Stefan Roth.
+      </p>
+
+      <table class="contact-table">
+        <tr>
+          <td>Email:</td>
+          <td><a href="/cdn-cgi/l/email-protection#73001b041607125d1d1a071b331c06071f1c1c185d101c1e"><span class="__cf_email__" data-cfemail="37445f4052435619595e435f775842435b58585c1954585a">[email&#160;protected]</span></a></td>
+        </tr>
+        <tr>
+          <td>Scholar:</td>
+          <td><a href="https://scholar.google.de/citations?user=DUKzkPMAAAAJ&hl=en">Google Scholar profile</a></td>
+        </tr>
+        <tr>
+          <td>LinkedIn:</td>
+          <td><a href="https://www.linkedin.com/in/shweta-mahajan-4808a017/">linkedin.com/in/shweta-mahajan</a></td>
+        </tr>
+        <tr>
+          <td>CV:</td>
+          <td><a href="/pdfs/cv.pdf">Download CV (PDF)</a></td>
+        </tr>
+      </table>
+
+      <div class="profile-links">
+        <a href="/cdn-cgi/l/email-protection#bccfd4cbd9c8dd92d2d5c8d4fcd3c9c8d0d3d3d792dfd3d1" class="btn-primary">✉ Email</a>
+        <a href="https://scholar.google.de/citations?user=DUKzkPMAAAAJ&hl=en" class="btn-outline">Google Scholar</a>
+        <a href="https://www.linkedin.com/in/shweta-mahajan-4808a017/" class="btn-outline">LinkedIn</a>
+        <a href="/pdfs/cv.pdf" class="btn-outline">CV ↓</a>
       </div>
     </div>
-    <div class="photo-box a2">
-      <div class="photo-placeholder">Photo</div>
-    </div>
   </div>
 
-  <div style="margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--border)" class="a3">
-    <p class="section-label">Recent News</p>
-    <ul class="news-list">
-      <li><span class="date">Jan 2026</span><span><span class="badge">New</span>Started as Assistant Professor at York University and Vector faculty affiliate!</span></li>
-      <li><span class="date">Nov 2025</span><span>Attention Guided Alignment in Efficient Vision-Language Models at <strong>NeurIPS 2025</strong> Workshop on Efficient Reasoning.</span></li>
-      <li><span class="date">Nov 2025</span><span><span class="badge">Award</span>Recognized as a <strong>Top Reviewer</strong> at NeurIPS 2025.</span></li>
-      <li><span class="date">Jul 2025</span><span>DuoLoRA accepted at <strong>ICCV 2025</strong>.</span></li>
-      <li><span class="date">Feb 2025</span><span>HyperNet Fields accepted at <strong>CVPR 2025</strong>.</span></li>
-      <li><span class="date">Feb 2025</span><span>Distilling Multi-modal LLMs for Autonomous Driving accepted at <strong>CVPR 2025</strong>.</span></li>
-      <li><span class="date">Nov 2024</span><span><span class="badge">Award</span>Recognized as a <strong>Top Reviewer</strong> at NeurIPS 2024.</span></li>
-      <li><span class="date">Feb 2024</span><span>Three papers accepted at <strong>CVPR 2024</strong>: Prompt Inversion, ViVid-1-to-3, and Unsupervised Keypoints.</span></li>
-    </ul>
-  </div>
+  <!-- ── Recent News ──────────────────────────────────────── -->
+  <h2 class="section-heading">Recent News</h2>
+  <ul class="news-list">
+    <li>
+      <span class="news-date">Jan 2026</span>
+      <span class="news-tag tag-new">New</span>
+      <span class="news-body">Started as <strong>Assistant Professor</strong> at York University and Vector faculty affiliate!</span>
+    </li>
+    <li>
+      <span class="news-date">Nov 2025</span>
+      <span class="news-tag tag-new">New</span>
+      <span class="news-body">Attention Guided Alignment in Efficient Vision-Language Models at <strong>NeurIPS 2025</strong> Workshop on Efficient Reasoning.</span>
+    </li>
+    <li>
+      <span class="news-date">Nov 2025</span>
+      <span class="news-tag tag-award">Award</span>
+      <span class="news-body">Recognized as a <strong>Top Reviewer</strong> at NeurIPS 2025.</span>
+    </li>
+    <li>
+      <span class="news-date">Jul 2025</span>
+      <span class="news-tag tag-new">New</span>
+      <span class="news-body">DuoLoRA accepted at <strong>ICCV 2025</strong>.</span>
+    </li>
+    <li>
+      <span class="news-date">Feb 2025</span>
+      <span class="news-tag tag-new">New</span>
+      <span class="news-body">HyperNet Fields accepted at <strong>CVPR 2025</strong>.</span>
+    </li>
+    <li>
+      <span class="news-date">Feb 2025</span>
+      <span class="news-tag tag-new">New</span>
+      <span class="news-body">Distilling Multi-modal LLMs for Autonomous Driving accepted at <strong>CVPR 2025</strong>.</span>
+    </li>
+    <li>
+      <span class="news-date">Nov 2024</span>
+      <span class="news-tag tag-award">Award</span>
+      <span class="news-body">Recognized as a <strong>Top Reviewer</strong> at NeurIPS 2024.</span>
+    </li>
+    <li>
+      <span class="news-date">Feb 2024</span>
+      <span class="news-tag tag-new">New</span>
+      <span class="news-body">Three papers accepted at <strong>CVPR 2024</strong>: Prompt Inversion, ViVid-1-to-3, and Unsupervised Keypoints.</span>
+    </li>
+  </ul>
 
-  <hr class="rule">
-
-  <p class="section-label">Research Interests</p>
-  <div class="interests-grid">
-    <div class="interest-card a2">
+  <!-- ── Research Interests ──────────────────────────────── -->
+  <h2 class="section-heading">Research Interests</h2>
+  <div class="research-grid">
+    <div class="research-item">
       <h3>Diffusion Models</h3>
       <p>High-level and low-level vision; prompt inversion, view synthesis, personalization, and semantic correspondence.</p>
     </div>
-    <div class="interest-card a3">
+    <div class="research-item">
       <h3>Multimodal Learning</h3>
       <p>Cross-modal alignment, vision-language models, story generation, and multimodal representation learning.</p>
     </div>
-    <div class="interest-card a4">
-      <h3>Normalizing Flows & VAEs</h3>
+    <div class="research-item">
+      <h3>Normalizing Flows &amp; VAEs</h3>
       <p>Exact inference deep generative models, latent space factorization, multi-scale autoregressive priors.</p>
     </div>
-    <div class="interest-card a2">
+    <div class="research-item">
       <h3>Semantic Correspondence</h3>
       <p>Unsupervised keypoint detection and semantic correspondence using pretrained diffusion model features.</p>
     </div>
-    <div class="interest-card a3">
+    <div class="research-item">
       <h3>Autonomous Systems</h3>
       <p>Distillation of multi-modal LLMs for end-to-end autonomous driving planners.</p>
     </div>
-    <div class="interest-card a4">
+    <div class="research-item">
       <h3>Efficient Vision Models</h3>
       <p>Hypernetworks, efficient training strategies, and attention-guided alignment in compact vision-language models.</p>
     </div>
   </div>
-</div>
+
+</div><!-- /page -->
 
 <footer>
-  <span>© 2026 Multimodal Perceptual Intelligence Lab · York University</span>
-  <span><a href="/cdn-cgi/l/email-protection#2c5f445b49584d02424558446c43595840434347024f4341">Contact</a> &nbsp;·&nbsp; <a href="https://lassonde.yor
+  <span>© 2026 Multimodal Perceptual Intelligence Lab · York University<
